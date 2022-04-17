@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,24 +17,24 @@ import com.springboot.springbootappln.dao.model.Employee;
 import com.springboot.springbootappln.service.EmpService;
 
 @RestController
-public class EmployeeController {
+public class EmpController {
 	
 	@Autowired
 	EmpService empService;
 	
-	@GetMapping("/getAllEmployees")
-	public List<Employee> getAllEmployees(){
-		return empService.getAllEmployees();
+	@GetMapping("/getAllEmp")
+	public List<Employee> getAllEmp(){
+		return empService.getAllEmp();
 	}
 	
-	@PostMapping("/employee/add")
-	public Employee add(@RequestBody Employee emp){
+	@PostMapping("/addEmp")
+	public String add(@RequestBody Employee emp){
 		return empService.add(emp);	
 	}
 	
-	@PutMapping("/employee/update/{id}")
-	public Employee update(@RequestBody Employee employee, @PathVariable int id){
-		return empService.updateEmployee(id, employee);	
+	@PutMapping("/update")
+	public String update(@RequestBody Employee emp){
+		return empService.update(emp);	
 	}
 	
 	@DeleteMapping("/delete")

@@ -1,7 +1,6 @@
 package com.springboot.springbootappln.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,18 +21,16 @@ public class EmpService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public List<Employee> getAllEmployees(){
-		return employeeRepository.findAll();
+	public List<Employee> getAllEmp(){
+		return crudAppln.getAllEmp();
 	}
 	
-	public Employee add(Employee employee) {
-		return employeeRepository.save(employee);
+	public String add(Employee emp) {
+		return crudAppln.add(emp);
 	}
 
-	public Employee updateEmployee(int id, Employee employee) {
-		
-		Employee emp = employeeRepository.getById(id);
-		return employeeRepository.save(employee);
+	public String update(Employee emp) {
+		return crudAppln.update(emp);
 	}
 	public String delete(int eid) {
 		return crudAppln.delete(eid);

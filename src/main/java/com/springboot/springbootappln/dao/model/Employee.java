@@ -1,37 +1,34 @@
 package com.springboot.springbootappln.dao.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "employees")
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private int eid;
-	
 	private String ename;
-	
 	private int sal;
 	private int age;
 	
-	@ManyToOne
-	@JoinColumn(name = "cid")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties("employee")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cid_fk", nullable = false)
 	private Company company;
 	
 	
-	public long getEid() {
+	public int getEid() {
 		return eid;
 	}
 

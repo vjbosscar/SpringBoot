@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,30 +18,30 @@ import com.springboot.springbootappln.dao.model.Employee;
 import com.springboot.springbootappln.service.EmpService;
 
 @RestController
-public class EmpController {
+public class EmployeeController {
 	
 	@Autowired
 	EmpService empService;
 	
-	@GetMapping("/getAllEmp")
+	@GetMapping("/getEmployees")
 	public List<Employee> getAllEmp(){
-		return empService.getAllEmp();
+		return empService.getAllEmployees();
 	}
 	
-	@PostMapping("/addEmp")
-	public String add(@RequestBody Employee emp){
-		return empService.add(emp);	
+	@PostMapping("/addEmployee")
+	public Employee add(@RequestBody Employee employee){
+		return empService.addEmployee(employee);	
 	}
 	
-	@PutMapping("/update")
-	public String update(@RequestBody Employee emp){
-		return empService.update(emp);	
+	@PutMapping("/employee/update/{id}")
+	public Employee update(@RequestBody Employee employee, @PathVariable int id){
+		return empService.updateEmployee(employee, id);	
 	}
 	
-	@DeleteMapping("/delete")
-	public String delete(@RequestParam int eid){
-		return empService.delete(eid);	
-	}
+//	@DeleteMapping("/delete")
+//	public String delete(@RequestParam int eid){
+//		return empService.delete(eid);	
+//	}
 	
 	@GetMapping("/listSpecEmp")
 	public List<Employee> listSpecEmp(){

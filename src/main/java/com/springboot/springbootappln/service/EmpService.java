@@ -12,8 +12,6 @@ import com.springboot.springbootappln.dao.repository.EmployeeRepository;
 
 @Service
 public class EmpService {
-	@Autowired
-	CRUDAppln crudAppln;
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -21,20 +19,21 @@ public class EmpService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	public List<Employee> getAllEmp(){
-		return crudAppln.getAllEmp();
+	public List<Employee> getAllEmployees(){
+		return employeeRepository.findAll();
 	}
 	
-	public String add(Employee emp) {
-		return crudAppln.add(emp);
+	public Employee addEmployee(Employee employee) {
+		return employeeRepository.save(employee);
 	}
 
-	public String update(Employee emp) {
-		return crudAppln.update(emp);
+	public Employee updateEmployee(Employee employee, int id) {
+		Employee employeeNew = employeeRepository.getById(id);
+		return employeeRepository.save(employee);
 	}
-	public String delete(int eid) {
-		return crudAppln.delete(eid);
-	}
+//	public String delete(int eid) {
+//		return crudAppln.delete(eid);
+//	}
 	
 	public List<Employee> listSpecEmp(){
 		employeeRepository.findAll().stream().filter(t -> t.getEname().startsWith("V")).forEach(t -> {t.setSal(t.getSal()+5000);

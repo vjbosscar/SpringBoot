@@ -3,6 +3,7 @@ package com.springboot.springbootappln.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,30 +39,21 @@ public class EmployeeController {
 		return empService.updateEmployee(employee, id);	
 	}
 	
-//	@DeleteMapping("/delete")
-//	public String delete(@RequestParam int eid){
-//		return empService.delete(eid);	
+	@DeleteMapping("/deleteEmployee/{id}")
+	public String delete(@PathVariable int id){
+		empService.deleteEmployee(id);	
+		return null;
+	}
+	
+	@GetMapping("/getEmployee/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable int id){
+		return empService.getEmployeeById(id);	
+	}
+	
+//	@GetMapping("/updateSal")
+//	public List<Employee> updateSal(){
+//		return empService.updateSal();	
 //	}
-	
-	@GetMapping("/listSpecEmp")
-	public List<Employee> listSpecEmp(){
-		return empService.listSpecEmp();	
-	}
-	
-	@GetMapping("/updateSal")
-	public List<Employee> updateSal(){
-		return empService.updateSal();	
-	}
-	
-	@GetMapping("/getAllComp")
-	public List<Company> getAllComp(){
-		return empService.getAllComp();	
-	}
-	
-	@PostMapping("/saveAllComp")
-	public List<Company> saveAllComp(@RequestBody Company comp){
-		return empService.saveAllComp(comp);	
-	}
 	
 	
 }

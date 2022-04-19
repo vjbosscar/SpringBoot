@@ -1,5 +1,7 @@
 package com.springboot.springbootappln.dao.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,6 +33,27 @@ public class Employee {
 	@ManyToOne
 	@JoinColumn(name = "cid", nullable = false)
 	private Company company;
+	
+	@CreationTimestamp
+	private Date created_timestamp;
+	
+	@UpdateTimestamp
+	private Date updated_timestamp;
+	
+	
+	
+	public Date getCreated_timestamp() {
+		return created_timestamp;
+	}
+	public void setCreated_timestamp(Date created_timestamp) {
+		this.created_timestamp = created_timestamp;
+	}
+	public Date getUpdated_timestamp() {
+		return updated_timestamp;
+	}
+	public void setUpdated_timestamp(Date updated_timestamp) {
+		this.updated_timestamp = updated_timestamp;
+	}
 	
 	
 	public int getEid() {

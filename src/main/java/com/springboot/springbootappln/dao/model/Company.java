@@ -1,6 +1,7 @@
 package com.springboot.springbootappln.dao.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,12 +14,40 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cid;
 	private String cname;
+	
+	@OneToMany(mappedBy = "company",cascade = CascadeType.REMOVE)
+    private List<Employee> employees = new ArrayList<>();
+	
+	@CreationTimestamp
+	private Date created_timestamp;
+	
+	@UpdateTimestamp
+	private Date updated_timestamp;
+	
+	
+	
+	
+	public Date getCreated_timestamp() {
+		return created_timestamp;
+	}
+	public void setCreated_timestamp(Date created_timestamp) {
+		this.created_timestamp = created_timestamp;
+	}
+	public Date getUpdated_timestamp() {
+		return updated_timestamp;
+	}
+	public void setUpdated_timestamp(Date updated_timestamp) {
+		this.updated_timestamp = updated_timestamp;
+	}
 	
 	public int getCid() {
 		return cid;
